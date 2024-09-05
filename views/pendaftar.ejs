@@ -1,0 +1,63 @@
+
+    <div class="mt-5">  
+        <h2 class="text-center mb-4">Daftar Murid yang Sudah Mendaftar</h2>  
+        <% if (msg.length !==0) { %>
+         <div class="alert alert-success" role="alert">
+            <%= msg %>
+         </div>
+        <% } %>
+        <table class="table table-striped">  
+            <thead>  
+                <tr>  
+                    <th>#</th>  
+                    <th>Nama</th>  
+                    <th>Umur</th>  
+                    <th>Alamat</th>  
+                    <th>Asal Sekolah</th>  
+                    <th>Tanggal Lahir</th>  
+                </tr>  
+            </thead>  
+            <tbody>  
+                <% if (students.length===0) { %>
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Contact belum ada</strong> masukan data terlebih dahulu.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        </td>
+                    </tr>
+                <% } %>
+                <% students.forEach((student, i) => { %>
+                    <tr>
+                        <th scope="row">
+                            <%= i+1 %>
+                        </th>
+                        <td>
+                            <%= student.nama %>
+                        </td>
+                        <td>
+                            <%= student.umur %>
+                        </td>
+                        <td>
+                            <%= student.alamat %>
+                        </td>
+                        <td>
+                            <%= student.asalSekolah %>
+                        </td>
+                        <td>
+                            <%= student.tanggalLahir %>
+                            <form action="/pendaftar/<%= student._id %>?_method=DELETE" method="post"  class="d-inline" >
+                                <button type="submit" class="btn btn-danger badge">Hapus</button>
+                            </form>
+                            <a href="/edit/<%= student._id %>" class="btn btn-primary badge">Edit</a>
+                        </td>
+                    </tr>
+                
+                <% }) %>
+
+            </tbody>  
+        </table>  
+    </div>  
+</div>
